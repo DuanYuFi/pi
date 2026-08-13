@@ -1,0 +1,7 @@
+{
+	"name": "@technoledge/company",
+	"version": "0.84.1",
+	"description": "Technoledge Co. organization and runtime built on Pi",
+	"private": true,
+	"type": "module"
+}

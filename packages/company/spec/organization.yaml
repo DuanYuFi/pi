@@ -1,0 +1,119 @@
+apiVersion: technoledge.co/v1alpha1
+kind: Organization
+
+metadata:
+  id: technoledge
+  name: Technoledge Co.
+  phase: 1
+
+spec:
+  departments:
+    - id: administration
+      name: 行政部
+    - id: operations-support
+      name: 运营保障部
+    - id: finance
+      name: 财务部
+    - id: human-resources
+      name: 人力资源部
+    - id: operations
+      name: 运营部
+    - id: engineering
+      name: 研发部
+
+  positions:
+    - id: executive.general-manager
+      name: 总经理
+      actorType: human
+      roleRef: general-manager
+      staffing:
+        min: 1
+        max: 1
+
+    - id: administration.chief-secretary
+      name: 大秘书
+      actorType: agent
+      departmentRef: administration
+      roleRef: chief-secretary
+      reportsTo: executive.general-manager
+      workAssignedBy:
+        - executive.general-manager
+      staffing:
+        min: 1
+        max: 1
+
+    - id: operations-support.specialist
+      name: 运营保障专员
+      actorType: agent
+      departmentRef: operations-support
+      roleRef: operations-support
+      reportsTo: administration.chief-secretary
+      workAssignedBy:
+        - administration.chief-secretary
+      staffing:
+        min: 1
+        max: 1
+
+    - id: finance.token-accountant
+      name: Token 财务专员
+      actorType: agent
+      departmentRef: finance
+      roleRef: token-accountant
+      reportsTo: administration.chief-secretary
+      workAssignedBy:
+        - administration.chief-secretary
+      staffing:
+        min: 1
+        max: 1
+
+    - id: human-resources.workforce-planner
+      name: 人力规划专员
+      actorType: agent
+      departmentRef: human-resources
+      roleRef: workforce-planner
+      reportsTo: administration.chief-secretary
+      workAssignedBy:
+        - administration.chief-secretary
+      staffing:
+        min: 1
+        max: 1
+
+    - id: human-resources.agent-trainer
+      name: Agent 培训专员
+      actorType: agent
+      departmentRef: human-resources
+      roleRef: agent-trainer
+      reportsTo: administration.chief-secretary
+      workAssignedBy:
+        - administration.chief-secretary
+      staffing:
+        min: 1
+        max: 1
+
+    - id: operations.project-manager
+      name: 项目经理
+      actorType: agent
+      departmentRef: operations
+      roleRef: project-manager
+      reportsTo: administration.chief-secretary
+      workAssignedBy:
+        - administration.chief-secretary
+      staffing:
+        min: 1
+        max: 1
+
+    - id: engineering.pool
+      name: 研发岗位池
+      actorType: agent-pool
+      departmentRef: engineering
+      reportsTo: operations.project-manager
+      workAssignedBy:
+        - operations.project-manager
+      requiredRoleCoverage:
+        - developer
+        - tester
+        - security-engineer
+      staffing:
+        min: 1
+        max: null
+
