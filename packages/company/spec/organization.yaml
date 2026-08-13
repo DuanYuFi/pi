@@ -23,7 +23,7 @@ spec:
 
   positions:
     - id: executive.general-manager
-      name: 总经理
+      name: CEO
       actorType: human
       roleRef: general-manager
       staffing:
