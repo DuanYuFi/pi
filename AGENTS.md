@@ -6,7 +6,7 @@ Technoledge Co. is a small company that operated by Agents. The development is b
 
 1. Use conda for Python development environment. But you can use venv for the real operation of the company.
 2. [References](../References) includes some related scientific or projects that could refer.
-3. The organization structure is defined in [organization.yaml](./packages/company/spec/organization.yaml).
+3. The development plan is defined in [company-development-plan.md](./company-development-plan.md).
 
 ## Conversational Style
 
