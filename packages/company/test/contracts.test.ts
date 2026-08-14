@@ -143,7 +143,7 @@ describe("organization contract", () => {
 		const organization = parseOrganizationYaml(organizationYaml);
 
 		expect(organization.metadata.id).toBe("technoledge");
-		expect(organization.spec.positions).toHaveLength(8);
+		expect(organization.spec.positions).toHaveLength(7);
 		expect(deriveReportingRelationships(organization)).toEqual([
 			{
 				positionRef: "administration.chief-secretary",
@@ -155,10 +155,6 @@ describe("organization contract", () => {
 			},
 			{
 				positionRef: "finance.token-accountant",
-				reportsToPositionRef: "administration.chief-secretary",
-			},
-			{
-				positionRef: "human-resources.workforce-planner",
 				reportsToPositionRef: "administration.chief-secretary",
 			},
 			{
@@ -174,6 +170,18 @@ describe("organization contract", () => {
 				reportsToPositionRef: "operations.project-manager",
 			},
 		]);
+	});
+
+	test("uses the consolidated human-resources position and review-capable engineering pool", () => {
+		const organization = parseOrganizationYaml(organizationYaml);
+		const positionById = new Map(organization.spec.positions.map((position) => [position.id, position]));
+
+		expect(positionById.has("human-resources.workforce-planner")).toBe(false);
+		expect(positionById.has("human-resources.agent-trainer")).toBe(true);
+		expect(positionById.get("engineering.pool")).toMatchObject({
+			requiredRoleCoverage: ["developer", "tester", "security-engineer", "reviewer"],
+			staffing: { min: 2, max: null },
+		});
 	});
 
 	test("rejects duplicate identifiers", () => {
